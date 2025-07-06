@@ -614,6 +614,19 @@ st.markdown("""
         .message-container {
             margin-bottom: 1rem;
         }
+        
+        /* Floating toggle button on mobile */
+        .toggle-container {
+            top: 15px !important;
+            left: 15px !important;
+        }
+        
+        .toggle-container .stButton > button {
+            width: 45px !important;
+            height: 45px !important;
+            min-height: 45px !important;
+            font-size: 16px !important;
+        }
     }
     
     @media (max-width: 480px) {
@@ -628,6 +641,19 @@ st.markdown("""
         .stTextInput > div > div > input {
             padding: 12px 50px 12px 16px;
             font-size: 14px;
+        }
+        
+        /* Floating toggle button on small screens */
+        .toggle-container {
+            top: 10px !important;
+            left: 10px !important;
+        }
+        
+        .toggle-container .stButton > button {
+            width: 40px !important;
+            height: 40px !important;
+            min-height: 40px !important;
+            font-size: 14px !important;
         }
     }
     
@@ -658,38 +684,115 @@ st.markdown("""
         bottom: 0;
     }
     
-    /* Sidebar toggle button */
-    .sidebar-toggle {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 1001;
-        background: #875A7B;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        font-size: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
+    /* Floating sidebar toggle button */
+    .floating-toggle {
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important;
+        background: #875A7B !important;
+        color: white !important;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(135, 90, 123, 0.3) !important;
+        transition: all 0.3s ease !important;
+        padding: 0 !important;
+        min-height: 50px !important;
+        font-size: 18px !important;
+        font-weight: bold !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     
-    .sidebar-toggle:hover {
-        background: #A0729A;
-        transform: scale(1.1);
+    .floating-toggle:hover {
+        background: #A0729A !important;
+        transform: scale(1.1) !important;
+        box-shadow: 0 6px 16px rgba(135, 90, 123, 0.4) !important;
     }
     
-    /* Hide sidebar when toggled */
-    .sidebar-hidden .css-1d391kg {
-        margin-left: -21rem;
-        transition: margin-left 0.3s ease;
+    .floating-toggle:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(135, 90, 123, 0.3) !important;
     }
     
+    /* Hide the toggle button container from normal flow */
+    .toggle-container {
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+        width: 50px !important;
+        height: 50px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .toggle-container .stButton {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .toggle-container .stButton > button {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important;
+        background: #875A7B !important;
+        color: white !important;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(135, 90, 123, 0.3) !important;
+        transition: all 0.3s ease !important;
+        padding: 0 !important;
+        min-height: 50px !important;
+        font-size: 18px !important;
+        font-weight: bold !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+    }
+    
+    .toggle-container .stButton > button:hover {
+        background: #A0729A !important;
+        transform: scale(1.1) !important;
+        box-shadow: 0 6px 16px rgba(135, 90, 123, 0.4) !important;
+    }
+    
+    .toggle-container .stButton > button:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(135, 90, 123, 0.3) !important;
+    }
+    
+    /* Style other buttons */
+    .stButton:not(.toggle-container .stButton) > button {
+        background: #875A7B !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 0.5rem 1rem !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 4px rgba(135, 90, 123, 0.2) !important;
+    }
+    
+    .stButton:not(.toggle-container .stButton) > button:hover {
+        background: #A0729A !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 8px rgba(135, 90, 123, 0.3) !important;
+    }
+    
+    /* Adjust layout when sidebar is hidden */
     .sidebar-hidden .input-container {
         left: 0 !important;
         transition: left 0.3s ease;
@@ -697,15 +800,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar toggle button
-st.markdown("""
-<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
-<script>
-function toggleSidebar() {
-    document.querySelector('.stApp').classList.toggle('sidebar-hidden');
-}
-</script>
-""", unsafe_allow_html=True)
+# Initialize sidebar state
+if 'sidebar_open' not in st.session_state:
+    st.session_state.sidebar_open = True
 
 # API base URL
 API_BASE_URL = "http://52.72.249.33:8000"
@@ -860,60 +957,72 @@ def get_session_title(session_id):
         return st.session_state.sessions[session_id]['title']
     return f"Chat {session_id[:8]}"
 
+# Floating sidebar toggle button
+st.markdown('<div class="toggle-container">', unsafe_allow_html=True)
+if st.button("☰", key="sidebar_toggle", help="Toggle sidebar"):
+    st.session_state.sidebar_open = not st.session_state.sidebar_open
+    st.rerun()
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Update the CSS class on the app container based on sidebar state
+if not st.session_state.sidebar_open:
+    st.markdown('<style>.input-container { left: 0 !important; }</style>', unsafe_allow_html=True)
+
 # Sidebar
-with st.sidebar:
-    st.image("images/logo.png", width=100)
-    st.markdown("""
-    <div class="sidebar-header">
-        <div class="chat-title">Syncoria Assistant</div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # New chat button
-    if st.button("➕ New Chat", key="new-chat-trigger", help="Create a new chat session"):
-        create_new_session()
-        st.rerun()
-    
-    # Chat sessions
-    if st.session_state.sessions:
-        st.markdown('<div class="chat-title">Recent Chats</div>', unsafe_allow_html=True)
+if st.session_state.sidebar_open:
+    with st.sidebar:
+        st.image("images/logo.png", width=100)
+        st.markdown("""
+        <div class="sidebar-header">
+            <div class="chat-title">Syncoria Assistant</div>
+        </div>
+        """, unsafe_allow_html=True)
         
-        for session_id, session_info in st.session_state.sessions.items():
-            is_active = session_id == st.session_state.current_session_id
+        # New chat button
+        if st.button("➕ New Chat", key="new-chat-trigger", help="Create a new chat session"):
+            create_new_session()
+            st.rerun()
+        
+        # Chat sessions
+        if st.session_state.sessions:
+            st.markdown('<div class="chat-title">Recent Chats</div>', unsafe_allow_html=True)
             
-            if st.button(
-                session_info['title'],
-                key=f"session_{session_id}",
-                help=f"Created: {format_timestamp(session_info['created_at'])}",
-                type="primary" if is_active else "secondary"
-            ):
-                st.session_state.current_session_id = session_id
-                # Load chat history
-                history_data = get_chat_history(session_id)
-                if history_data:
-                    # Process the chat history to handle the new API structure
-                    processed_messages = []
-                    for msg in history_data.get('messages', []):
-                        if msg['role'].lower() == 'user':
-                            # For user messages, use either 'query' or 'content'
-                            processed_messages.append({
-                                'role': 'user',
-                                'content': msg.get('query', msg.get('content', '')),
-                                'timestamp': msg.get('timestamp', '')
-                            })
-                        else:
-                            # For assistant messages
-                            processed_messages.append({
-                                'role': 'assistant',
-                                'content': msg.get('content', ''),
-                                'analysis': msg.get('analysis', msg.get('content', '')),
-                                'chart_generated': bool(msg.get('chart_s3_url')),
-                                'chart_s3_url': msg.get('chart_s3_url'),
-                                'chart_decision_reason': msg.get('chart_decision_reason'),
-                                'timestamp': msg.get('timestamp', '')
-                            })
-                    st.session_state.chat_history = processed_messages
-                st.rerun()
+            for session_id, session_info in st.session_state.sessions.items():
+                is_active = session_id == st.session_state.current_session_id
+                
+                if st.button(
+                    session_info['title'],
+                    key=f"session_{session_id}",
+                    help=f"Created: {format_timestamp(session_info['created_at'])}",
+                    type="primary" if is_active else "secondary"
+                ):
+                    st.session_state.current_session_id = session_id
+                    # Load chat history
+                    history_data = get_chat_history(session_id)
+                    if history_data:
+                        # Process the chat history to handle the new API structure
+                        processed_messages = []
+                        for msg in history_data.get('messages', []):
+                            if msg['role'].lower() == 'user':
+                                # For user messages, use either 'query' or 'content'
+                                processed_messages.append({
+                                    'role': 'user',
+                                    'content': msg.get('query', msg.get('content', '')),
+                                    'timestamp': msg.get('timestamp', '')
+                                })
+                            else:
+                                # For assistant messages
+                                processed_messages.append({
+                                    'role': 'assistant',
+                                    'content': msg.get('content', ''),
+                                    'analysis': msg.get('analysis', msg.get('content', '')),
+                                    'chart_generated': bool(msg.get('chart_s3_url')),
+                                    'chart_s3_url': msg.get('chart_s3_url'),
+                                    'chart_decision_reason': msg.get('chart_decision_reason'),
+                                    'timestamp': msg.get('timestamp', '')
+                                })
+                        st.session_state.chat_history = processed_messages
+                    st.rerun()
 
 # Main content area
 
