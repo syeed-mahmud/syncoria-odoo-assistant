@@ -657,7 +657,54 @@ st.markdown("""
         position: sticky;
         bottom: 0;
     }
+    
+    /* Sidebar toggle button */
+    .sidebar-toggle {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        background: #875A7B;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .sidebar-toggle:hover {
+        background: #A0729A;
+        transform: scale(1.1);
+    }
+    
+    /* Hide sidebar when toggled */
+    .sidebar-hidden .css-1d391kg {
+        margin-left: -21rem;
+        transition: margin-left 0.3s ease;
+    }
+    
+    .sidebar-hidden .input-container {
+        left: 0 !important;
+        transition: left 0.3s ease;
+    }
 </style>
+""", unsafe_allow_html=True)
+
+# Sidebar toggle button
+st.markdown("""
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+<script>
+function toggleSidebar() {
+    document.querySelector('.stApp').classList.toggle('sidebar-hidden');
+}
+</script>
 """, unsafe_allow_html=True)
 
 # API base URL
